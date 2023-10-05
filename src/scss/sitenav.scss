@@ -1,0 +1,20 @@
+.nav {
+  background: #fff7ed;
+  &__brand {
+    color: #000;
+    font-size: 1.625rem;
+    font-weight: 900;
+  }
+  &__link {
+    color: #4d4d4d;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4d4d4d;
+    &:hover {
+      text-decoration: underline;
+    }
+    &--selected {
+      color: #161616;
+    }
+  }
+}
