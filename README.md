@@ -1,27 +1,36 @@
-# React + TypeScript + Vite
+# Van Life
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Part of Scrimba's Advanced React course. A site where people can rent out camper vans for roadtrip adventures. Goal is to practice working with React Router.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Tools](#tools)
+- [Features to Add](#features-to-add)
+- [Quick Start](#quick-start)
 
-## Expanding the ESLint configuration
+## Tools
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Made with React, React Router, Vite, and TypeScript.
 
-- Configure the top-level `parserOptions` property like this:
+## Features to add
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+- [ ] The app
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Stretch Goals
+
+- [x] None so far
+
+## Quick start
+
+1.  **Start developing.**
+
+    Navigate into the site’s directory and start it up.
+
+    ```shell
+    npm install
+    npm run dev
+    ```
+
+2.  **Open the code and start customizing!**
+
+    Your site is now running at http://localhost:5173!
