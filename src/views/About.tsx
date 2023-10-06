@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
+import header from "../assets/images/header-about.webp";
 import "../scss/about.scss";
 
 const About = () => (
   <section className="about">
-    <img src="src/assets/images/header-about.webp" />
+    <img src={header} />
     <Container className="site-page">
       <h2>Don’t squeeze in a sedan when you could relax in a van.</h2>
       <p>

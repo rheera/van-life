@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
+import header from "../assets/images/header-home.webp";
+
 import "../scss/home.scss";
 
 const Home = () => {
+  const bgImg = { backgroundImage: `url(${header})` };
   return (
-    <section className="home">
+    <section className="home" style={bgImg}>
       <Container className="site-page">
         <h1>You got the travel plans, we got the travel vans.</h1>
         <h3>
