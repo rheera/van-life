@@ -1,12 +1,19 @@
+@import "./variables.scss";
+
 .footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 4.75rem;
+  height: $footerHeight;
   background-color: #252525;
   &__text {
     color: #aaa;
     font-size: 0.875rem;
     font-weight: 500;
+    .copyright {
+      font-size: 1.5rem;
+      vertical-align: sub;
+      font-weight: 400;
+    }
   }
 }

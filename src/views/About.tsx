@@ -1,9 +1,31 @@
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import "../scss/about.scss";
 
 const About = () => (
-  <Container>
-    <h1>About page</h1>
-  </Container>
+  <section className="about">
+    <img src="src/assets/images/header-about.webp" />
+    <Container className="site-page">
+      <h2>Don’t squeeze in a sedan when you could relax in a van.</h2>
+      <p>
+        Our mission is to enliven your road trip with the perfect travel van
+        rental. Our vans are recertified before each trip to ensure your travel
+        plans can go off without a hitch. (Hitch costs extra 😉)
+      </p>
+      <p>
+        Our team is full of vanlife enthusiasts who know firsthand the magic of
+        touring the world on 4 wheels.
+      </p>
+      <div className="about__explore">
+        <h4>Your destination is waiting.</h4>
+        <h4>Your van is ready.</h4>
+        <Button to="/vans" variant="dark" as={Link}>
+          Explore our vans
+        </Button>
+      </div>
+    </Container>
+  </section>
 );
 
 export default About;
