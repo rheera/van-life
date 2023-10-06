@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
 import "../scss/home.scss";
 
 const Home = () => {
@@ -12,9 +11,9 @@ const Home = () => {
           Add adventure to your life by joining the #vanlife movement. Rent the
           perfect van to make your perfect road trip.
         </h3>
-        <Button as={Link} to="/vans">
+        <Link to="/vans" className="btn btn-dark" role="button">
           Find your van
-        </Button>
+        </Link>
       </Container>
     </section>
   );

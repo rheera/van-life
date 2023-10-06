@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
 import "../scss/about.scss";
 
 const About = () => (
@@ -20,9 +19,9 @@ const About = () => (
       <div className="about__explore">
         <h4>Your destination is waiting.</h4>
         <h4>Your van is ready.</h4>
-        <Button to="/vans" variant="dark" as={Link}>
+        <Link to="/vans" className="btn btn-dark" role="button">
           Explore our vans
-        </Button>
+        </Link>
       </div>
     </Container>
   </section>
