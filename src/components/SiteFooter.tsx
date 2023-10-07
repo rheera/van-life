@@ -3,7 +3,7 @@ import "../scss/footer.scss";
 const Footer = () => (
   <footer className="footer">
     <div className="footer__text">
-      <span className="copyright">©</span> 2023 #VANLIFE
+      <span className="copyright">©</span> {new Date().getFullYear()} #VANLIFE
     </div>
   </footer>
 );
