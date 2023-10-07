@@ -1,0 +1,46 @@
+.van-detail {
+  .site-page {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 700px;
+    .underline-link {
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 5px;
+      }
+    }
+    img {
+      margin-top: 2.5rem;
+      align-self: center;
+      @media only screen and (max-width: 768px) {
+        margin-top: 2rem;
+      }
+    }
+    .van-type-badge {
+      margin-top: 3rem;
+      @media only screen and (max-width: 768px) {
+        margin-top: 2rem;
+      }
+    }
+    h3 {
+      margin-top: 1.25rem;
+      margin-bottom: 0;
+    }
+    .van-name-price {
+      margin-top: 0.625rem;
+      margin-bottom: 0;
+      span {
+        font-size: 1rem;
+      }
+    }
+    .van-detail__description {
+      margin-top: 0.625rem;
+      margin-bottom: 0;
+    }
+    .big-button {
+      margin-top: 1.25rem;
+    }
+  }
+}
