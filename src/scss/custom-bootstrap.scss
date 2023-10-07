@@ -1,4 +1,15 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 // Put customisations down here, under the bootstrap import
+.btn-warning {
+  background-color: #ffa05c;
+  border-color: #ffa05c;
+  color: #fff;
+  &:hover {
+    background-color: #ff8c38;
+    border-color: #ff8c38;
+    color: #fff;
+  }
+}
 @import "./sitenav.scss";
+@import "./vans.scss";

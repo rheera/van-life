@@ -1,0 +1,72 @@
+.vans {
+  &__filters {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    &__button {
+      color: #4d4d4d;
+      background-color: #ffead0;
+      border-color: transparent;
+      text-transform: capitalize;
+      &:hover {
+        color: #4d4d4d;
+        background-color: #e1c7a6;
+        border-color: transparent;
+      }
+    }
+    &__clear {
+      border: none;
+      background-color: transparent;
+      text-decoration: underline;
+      color: #4d4d4d;
+      font-weight: 500;
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+  &__all-vans {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    &__van {
+      flex-basis: 50%;
+      padding: 2rem;
+      img {
+        width: 100%;
+      }
+      &__text {
+        margin-top: 0.875rem;
+        display: flex;
+        justify-content: space-between;
+        h3 {
+          color: #161616;
+          font-size: 1.25rem;
+          font-weight: 600;
+          line-height: 100%;
+          margin: 0;
+        }
+        &__price {
+          display: flex;
+          flex-direction: column;
+          p {
+            margin: 0;
+            color: #161616;
+            text-align: right;
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 100%;
+          }
+          span {
+            color: #161616;
+            text-align: right;
+            font-family: Avenir Next;
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 100%;
+          }
+        }
+      }
+    }
+  }
+}
