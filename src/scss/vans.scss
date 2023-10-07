@@ -2,6 +2,7 @@
   &__filters {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 2rem;
     &__button {
       color: #4d4d4d;
@@ -14,26 +15,21 @@
         border-color: transparent;
       }
     }
-    &__clear {
-      border: none;
-      background-color: transparent;
-      text-decoration: underline;
-      color: #4d4d4d;
-      font-weight: 500;
-      &:hover {
-        color: #000;
-      }
-    }
   }
   &__all-vans {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 2rem;
     &__van {
-      flex-basis: 50%;
-      padding: 2rem;
+      flex-basis: calc(50% - 2rem);
+      margin-top: 2rem;
       img {
         width: 100%;
+        max-height: 600px;
+      }
+      a {
+        text-decoration: none;
       }
       &__text {
         margin-top: 0.875rem;
@@ -46,24 +42,30 @@
           line-height: 100%;
           margin: 0;
         }
-        &__price {
-          display: flex;
-          flex-direction: column;
-          p {
-            margin: 0;
-            color: #161616;
-            text-align: right;
-            font-size: 1.25rem;
-            font-weight: 600;
-            line-height: 100%;
-          }
-          span {
-            color: #161616;
-            text-align: right;
-            font-family: Avenir Next;
-            font-size: 0.875rem;
-            font-weight: 500;
-            line-height: 100%;
+      }
+      button {
+        text-transform: capitalize;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .vans {
+    &__filters {
+      justify-content: space-between;
+      column-gap: 1rem;
+      row-gap: 0.5rem;
+      button {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+      }
+    }
+    &__all-vans {
+      &__van {
+        &__text {
+          h3 {
+            font-size: 1rem;
           }
         }
       }

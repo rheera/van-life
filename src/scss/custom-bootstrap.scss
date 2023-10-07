@@ -2,14 +2,89 @@
 
 // Put customisations down here, under the bootstrap import
 .btn-warning {
-  background-color: #ffa05c;
-  border-color: #ffa05c;
+  background-color: #e17654;
+  border-color: #e17654;
   color: #fff;
   &:hover {
     background-color: #ff8c38;
     border-color: #ff8c38;
     color: #fff;
   }
+  &:disabled {
+    background-color: #e17654;
+    border-color: #e17654;
+    color: #fff;
+    opacity: 1;
+  }
+}
+
+.zoom-img {
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.underline-link {
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+  color: #4d4d4d;
+  font-weight: 500;
+  &:hover {
+    color: #000;
+  }
+}
+
+.van-name-price {
+  display: flex;
+  flex-direction: column;
+  p {
+    margin: 0;
+    color: #161616;
+    text-align: right;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 100%;
+  }
+  span {
+    color: #161616;
+    text-align: right;
+    font-family: Avenir Next;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 100%;
+  }
+  @media only screen and (max-width: 768px) {
+    p {
+      font-size: 1rem;
+    }
+    span {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+.van-type-badge {
+  width: fit-content;
+  text-transform: capitalize;
+  @media only screen and (max-width: 768px) {
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+.big-button {
+  width: 100%;
+  color: #fff;
+  font-weight: 700;
 }
 @import "./sitenav.scss";
 @import "./vans.scss";

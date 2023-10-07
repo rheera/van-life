@@ -3,6 +3,7 @@ import SiteNav from "./components/SiteNav";
 import Home from "./views/Home";
 import About from "./views/About";
 import Vans from "./views/Vans";
+import VanDetail from "./views/VanDetail";
 import Footer from "./components/SiteFooter";
 import "./scss/app.scss";
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/vans" element={<Vans />} />
+        <Route path="/vans/:id" element={<VanDetail />} />
       </Routes>
       <Footer />
     </BrowserRouter>

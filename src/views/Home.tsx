@@ -17,7 +17,9 @@ const Home = () => {
           perfect van to make your perfect road trip.
         </h3>
         <Link to="/vans">
-          <Button variant="warning">Find your van</Button>
+          <Button className="big-button" variant="warning">
+            Find your van
+          </Button>
         </Link>
       </Container>
     </section>
