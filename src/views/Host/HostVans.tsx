@@ -6,6 +6,7 @@ import "../../scss/host-vans.scss";
 
 const HostVans = () => {
   const [vanData, setVanData] = useState<Van[]>([]);
+  const [zoomVan, setZoomVan] = useState<string | number | null>(null);
 
   useEffect(() => {
     fetch("/api/host/vans")
@@ -15,24 +16,33 @@ const HostVans = () => {
 
   const displayVanData = vanData.map((van) => {
     return (
-      <div key={`van-${van.id}`} className="host-vans__all-vans__van-tile">
-        <div className="zoom-img">
-          <img src={van.imageUrl} alt={`${van.name} Van Image`} />
-        </div>{" "}
-        <div className="host-vans__all-vans__van-tile__van-text">
-          <h3>{van.name}</h3>
-          <p>${van.price}/day</p>
+      <Link
+        onMouseEnter={() => setZoomVan(van.id)}
+        onMouseLeave={() => setZoomVan(null)}
+        key={`van-${van.id}`}
+        to={`/host/vans/${van.id}`}
+      >
+        <div className="host-vans__all-vans__van-tile">
+          <div
+            className={`zoom-img ${
+              zoomVan === van.id ? "zoom-img--zoomed" : ""
+            }`}
+          >
+            <img src={van.imageUrl} alt={`${van.name} Van Image`} />
+          </div>{" "}
+          <div className="host-vans__all-vans__van-tile__van-text">
+            <h3>{van.name}</h3>
+            <p>${van.price}/day</p>
+          </div>
         </div>
-      </div>
+      </Link>
     );
   });
 
   return (
     <section className="host-vans">
-      <Container className="">
-        <h2>Your listed vans</h2>
-        <div className="host-vans__all-vans">{displayVanData}</div>
-      </Container>
+      <h2>Your listed vans</h2>
+      <div className="host-vans__all-vans">{displayVanData}</div>
     </section>
   );
 };

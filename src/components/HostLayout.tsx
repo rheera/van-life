@@ -11,27 +11,25 @@ const HostLayout = () => {
   return (
     <section className="host site-page main-content">
       <Navbar expand className="dashboard-nav">
-        <Container>
-          <Navbar.Collapse
-            id="dashboard-navbar"
-            className="justify-content-start"
-          >
-            <Nav>
-              <NavLink to="/host" end className={activeClass}>
-                Dashboard
-              </NavLink>
-              <NavLink to="/host/reviews" className={activeClass}>
-                Reviews
-              </NavLink>
-              <NavLink to="/host/vans" className={activeClass}>
-                Vans
-              </NavLink>
-              <NavLink to="/host/income" className={activeClass}>
-                Income
-              </NavLink>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
+        <Navbar.Collapse
+          id="dashboard-navbar"
+          className="justify-content-between"
+        >
+          <Nav>
+            <NavLink to="/host" end className={activeClass}>
+              Dashboard
+            </NavLink>
+            <NavLink to="/host/reviews" className={activeClass}>
+              Reviews
+            </NavLink>
+            <NavLink to="/host/vans" className={activeClass}>
+              Vans
+            </NavLink>
+            <NavLink to="/host/income" className={activeClass}>
+              Income
+            </NavLink>
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
 
       <Outlet />
