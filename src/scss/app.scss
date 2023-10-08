@@ -1,7 +1,8 @@
 @import "./custom-bootstrap.scss";
-
+@import "./variables.scss";
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: #fff7ed;
 }
 
 .site-page {
@@ -11,4 +12,8 @@ body {
     padding-top: 40px;
     padding-bottom: 40px;
   }
+}
+
+.main-content {
+  min-height: calc(100vh - $navHeight - $footerHeight);
 }

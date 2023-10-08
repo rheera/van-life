@@ -4,7 +4,7 @@ import header from "../assets/images/header-about.webp";
 import "../scss/about.scss";
 
 const About = () => (
-  <section className="about">
+  <section className="about main-content">
     <img src={header} />
     <Container className="site-page">
       <h2>Don’t squeeze in a sedan when you could relax in a van.</h2>

@@ -9,7 +9,7 @@ import "../scss/home.scss";
 const Home = () => {
   const bgImg = { backgroundImage: `url(${header})` };
   return (
-    <section className="home" style={bgImg}>
+    <section className="home main-content" style={bgImg}>
       <Container className="site-page">
         <h1>You got the travel plans, we got the travel vans.</h1>
         <h3>

@@ -25,21 +25,26 @@
     height: 100%;
     object-fit: cover;
     transition: all 0.3s ease;
-    &:hover {
+    &:hover,
+    .zoom-img--zoomed {
       transform: scale(1.1);
     }
   }
 }
 
-.underline-link {
+.underline-link,
+.active-link {
   border: none;
   background-color: transparent;
   text-decoration: underline;
   color: #4d4d4d;
   font-weight: 500;
   &:hover {
-    color: #000;
+    color: #161616;
   }
+}
+.active-link {
+  color: #161616 !important;
 }
 
 .van-name-price {

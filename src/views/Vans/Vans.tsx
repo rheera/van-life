@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Van } from "../types/interfaces";
-import { VanTypes } from "../types/enums";
-import { vanTypeButtonColor } from "../utils/functions";
+import { Van } from "../../types/interfaces";
+import { VanTypes } from "../../types/enums";
+import { vanTypeButtonColor } from "../../utils/functions";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
@@ -47,7 +47,7 @@ const Vans = () => {
   ));
 
   return (
-    <section className="vans">
+    <section className="vans main-content">
       <Container className="site-page">
         <h2>Explore our van options</h2>
         <div className="vans__filters">
