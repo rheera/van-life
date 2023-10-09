@@ -56,7 +56,11 @@ const Vans = () => {
             Clear filters
           </button>
         </div>
-        <div className="vans__all-vans">{displayVanData}</div>
+        {vanData.length > 0 ? (
+          <div className="vans__all-vans">{displayVanData}</div>
+        ) : (
+          <h3>Loading...</h3>
+        )}
       </Container>
     </section>
   );

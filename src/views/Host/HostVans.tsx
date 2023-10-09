@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Van } from "../../types/interfaces";
-import Container from "react-bootstrap/Container";
 import "../../scss/host-vans.scss";
 
 const HostVans = () => {
@@ -42,7 +41,11 @@ const HostVans = () => {
   return (
     <section className="host-vans">
       <h2>Your listed vans</h2>
-      <div className="host-vans__all-vans">{displayVanData}</div>
+      {vanData.length > 0 ? (
+        <div className="host-vans__all-vans">{displayVanData}</div>
+      ) : (
+        <h3>Loading...</h3>
+      )}
     </section>
   );
 };

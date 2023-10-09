@@ -10,19 +10,19 @@ const SiteNav = () => {
   return (
     <Navbar expand="sm" className="nav">
       <Container>
-        <Navbar.Brand className="nav__brand" to="/" as={Link}>
+        <Navbar.Brand className="nav__brand" to="." as={Link}>
           #VANLIFE
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="site-navbar" />
         <Navbar.Collapse id="site-navbar" className="justify-content-end">
           <Nav>
-            <NavLink to="/host" className={activeClass} role="button">
+            <NavLink to="host" className={activeClass} role="button">
               Host
             </NavLink>
-            <NavLink className={activeClass} to="/vans" role="button">
+            <NavLink className={activeClass} to="vans" role="button">
               Vans
             </NavLink>
-            <NavLink className={activeClass} to="/about" role="button">
+            <NavLink className={activeClass} to="about" role="button">
               About
             </NavLink>
           </Nav>

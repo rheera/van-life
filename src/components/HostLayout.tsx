@@ -9,23 +9,23 @@ const HostLayout = () => {
     return isActive ? "nav-link nav__link active-link" : "nav-link nav__link";
   };
   return (
-    <section className="host site-page main-content">
+    <Container className="host site-page main-content">
       <Navbar expand className="dashboard-nav">
         <Navbar.Collapse
           id="dashboard-navbar"
           className="justify-content-between"
         >
           <Nav>
-            <NavLink to="/host" end className={activeClass}>
+            <NavLink to="." end className={activeClass}>
               Dashboard
             </NavLink>
-            <NavLink to="/host/reviews" className={activeClass}>
+            <NavLink to="reviews" className={activeClass}>
               Reviews
             </NavLink>
-            <NavLink to="/host/vans" className={activeClass}>
+            <NavLink to="vans" className={activeClass}>
               Vans
             </NavLink>
-            <NavLink to="/host/income" className={activeClass}>
+            <NavLink to="income" className={activeClass}>
               Income
             </NavLink>
           </Nav>
@@ -33,7 +33,7 @@ const HostLayout = () => {
       </Navbar>
 
       <Outlet />
-    </section>
+    </Container>
   );
 };
 
