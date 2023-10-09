@@ -1,9 +1,11 @@
 .vans {
   &__filters {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
     flex-wrap: wrap;
     gap: 2rem;
+    margin-top: 1.25rem;
     &__button {
       color: #4d4d4d;
       background-color: #ffead0;
@@ -14,6 +16,30 @@
         background-color: #e1c7a6;
         border-color: transparent;
       }
+      &--simple {
+        &:hover,
+        &--selected {
+          background-color: #e17654;
+          border-color: #e17654;
+          color: #fff;
+        }
+      }
+      &--luxury {
+        &:hover,
+        &--selected {
+          background-color: #212529;
+          border-color: #212529;
+          color: #fff;
+        }
+      }
+      &--rugged {
+        &:hover,
+        &--selected {
+          background-color: #198754;
+          border-color: #198754;
+          color: #fff;
+        }
+      }
     }
   }
   &__all-vans {
@@ -22,7 +48,7 @@
     justify-content: center;
     gap: 2rem;
     &__van {
-      flex-basis: calc(50% - 2rem);
+      flex-basis: calc(50% - 1rem);
       margin-top: 2rem;
       img {
         width: 100%;
@@ -53,7 +79,6 @@
 @media only screen and (max-width: 768px) {
   .vans {
     &__filters {
-      justify-content: space-between;
       column-gap: 1rem;
       row-gap: 0.5rem;
       button {

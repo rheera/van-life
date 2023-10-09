@@ -1,0 +1,14 @@
+.host-van-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  h4 {
+    color: #161616;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    span {
+      font-weight: 500;
+    }
+  }
+}
