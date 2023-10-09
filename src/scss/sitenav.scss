@@ -2,7 +2,7 @@
 
 .nav {
   background: #fff7ed;
-  height: $navHeight;
+  min-height: $navHeight;
   &__brand {
     color: #000;
     font-size: 1.625rem;

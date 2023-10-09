@@ -1,24 +1,30 @@
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 const SiteNav = () => {
+  const activeClass = ({ isActive }: { isActive: boolean }) => {
+    return isActive ? "nav-link nav__link active-link" : "nav-link nav__link";
+  };
   return (
     <Navbar expand="sm" className="nav">
       <Container>
-        <Navbar.Brand className="nav__brand" to="/" as={Link}>
+        <Navbar.Brand className="nav__brand" to="." as={Link}>
           #VANLIFE
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+        <Navbar.Toggle aria-controls="site-navbar" />
+        <Navbar.Collapse id="site-navbar" className="justify-content-end">
           <Nav>
-            <Nav.Link className="nav__link " to="/about" as={Link}>
-              About
-            </Nav.Link>
-            <Nav.Link className="nav__link" to="/vans" as={Link}>
+            <NavLink to="host" className={activeClass} role="button">
+              Host
+            </NavLink>
+            <NavLink className={activeClass} to="vans" role="button">
               Vans
-            </Nav.Link>
+            </NavLink>
+            <NavLink className={activeClass} to="about" role="button">
+              About
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>

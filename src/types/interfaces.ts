@@ -7,4 +7,5 @@ export interface Van {
   name: string;
   price: number;
   type: VanTypes;
+  hostId: string | number;
 }

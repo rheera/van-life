@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Van } from "../types/interfaces";
-import { vanTypeButtonColor } from "../utils/functions";
+import { Van } from "../../types/interfaces";
+import { vanTypeButtonColor } from "../../utils/functions";
 import { Link } from "react-router-dom";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
-import "../scss/van-detail.scss";
+import "../../scss/van-detail.scss";
 
 const VanDetail = () => {
   const params = useParams();
@@ -19,7 +19,7 @@ const VanDetail = () => {
   }, [params.id]);
 
   return (
-    <section className="van-detail">
+    <section className="van-detail main-content">
       <Container className="site-page">
         <Link to="/vans" className="underline-link">
           <HiOutlineArrowLongLeft />
