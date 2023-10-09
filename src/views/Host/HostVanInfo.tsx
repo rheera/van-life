@@ -1,7 +1,23 @@
+import { useVan } from "../../hooks/useVan";
+import "../../scss/host-van-info.scss";
+
 const HostVanInfo = () => {
+  const { van } = useVan();
+
   return (
-    <section>
-      <h2>Van info here please</h2>
+    <section className="host-van-info">
+      <h4>
+        Name: <span>{van?.name}</span>
+      </h4>
+      <h4>
+        Category: <span>{van?.type}</span>
+      </h4>
+      <h4>
+        Description: <span>{van?.description}</span>
+      </h4>
+      <h4>
+        Visibility: <span>Public</span>
+      </h4>
     </section>
   );
 };

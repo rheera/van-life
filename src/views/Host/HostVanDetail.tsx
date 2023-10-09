@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "../../scss/host-van-detail.scss";
+import { ContextType } from "../../types/types";
 
 const HostVanDetail = () => {
   const [van, setVan] = useState<Van | null>(null);
@@ -71,7 +72,7 @@ const HostVanDetail = () => {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <Outlet />
+        <Outlet context={{ van } satisfies ContextType} />
       </div>
     </section>
   );
