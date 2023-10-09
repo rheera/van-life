@@ -40,8 +40,11 @@
         }
       }
     }
-    .nav-link {
-      padding-left: 0 !important;
+    .navbar {
+      margin-bottom: 1.25rem;
+      .nav-link {
+        padding-left: 0 !important;
+      }
     }
   }
 }
