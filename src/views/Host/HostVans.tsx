@@ -19,7 +19,7 @@ const HostVans = () => {
         onMouseEnter={() => setZoomVan(van.id)}
         onMouseLeave={() => setZoomVan(null)}
         key={`van-${van.id}`}
-        to={`/host/vans/${van.id}`}
+        to={`${van.id}`}
       >
         <div className="host-vans__all-vans__van-tile">
           <div

@@ -49,12 +49,12 @@ const Vans = () => {
   });
   const displayVanData = filteredVans.map((van) => (
     <div key={van.id} className="vans__all-vans__van">
-      <Link to={`/vans/${van.id}`}>
+      <Link to={`${van.id}`} state={{ search: "?" + searchParams.toString() }}>
         <div className="zoom-img">
           <img src={van.imageUrl} alt={`${van.name} Van Image`} />
         </div>
       </Link>
-      <Link to={`/vans/${van.id}`}>
+      <Link to={`${van.id}`}>
         <div className="vans__all-vans__van__text">
           <h3>{van.name}</h3>
           <div className="vans__all-vans__van__text__price van-name-price">

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Van } from "../../types/interfaces";
 import { vanTypeButtonColor } from "../../utils/functions";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -12,6 +12,10 @@ import "../../scss/van-detail.scss";
 const VanDetail = () => {
   const params = useParams();
   const [van, setVan] = useState<Van | null>(null);
+  const location = useLocation();
+
+  const search = location.state?.search || "";
+
   useEffect(() => {
     fetch(`/api/vans/${params.id}`)
       .then((res) => res.json())
@@ -21,7 +25,7 @@ const VanDetail = () => {
   return (
     <section className="van-detail main-content">
       <Container className="site-page">
-        <Link to="/vans" className="underline-link">
+        <Link to={`..${search}`} relative="path" className="underline-link">
           <HiOutlineArrowLongLeft />
           Back to all vans
         </Link>
