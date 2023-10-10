@@ -49,7 +49,10 @@ const Vans = () => {
   });
   const displayVanData = filteredVans.map((van) => (
     <div key={van.id} className="vans__all-vans__van">
-      <Link to={`${van.id}`} state={{ search: "?" + searchParams.toString() }}>
+      <Link
+        to={`${van.id}`}
+        state={{ search: "?" + searchParams.toString(), filterType }}
+      >
         <div className="zoom-img">
           <img src={van.imageUrl} alt={`${van.name} Van Image`} />
         </div>

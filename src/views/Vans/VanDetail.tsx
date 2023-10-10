@@ -16,6 +16,8 @@ const VanDetail = () => {
 
   const search = location.state?.search || "";
 
+  const typeOfGoBackVans = location.state?.filterType || "all";
+
   useEffect(() => {
     fetch(`/api/vans/${params.id}`)
       .then((res) => res.json())
@@ -27,7 +29,7 @@ const VanDetail = () => {
       <Container className="site-page">
         <Link to={`..${search}`} relative="path" className="underline-link">
           <HiOutlineArrowLongLeft />
-          Back to all vans
+          Back to {typeOfGoBackVans} vans
         </Link>
         {van ? (
           <>
