@@ -8,10 +8,16 @@ import "../scss/login.scss";
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
 
+  const handleSumbit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
@@ -19,7 +25,7 @@ const Login = () => {
     <section className="login main-content">
       <Container className="site-page">
         <h3>Sign in to your account</h3>
-        <Form>
+        <Form onSubmit={handleSumbit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <FloatingLabel
               controlId="floatingInput"
@@ -53,7 +59,7 @@ const Login = () => {
           </Button>
         </Form>
         <p>
-          Don’t have an account? <a href="">Create one now</a>
+          Don’t have an account? <a href="#">Create one now</a>
         </p>
       </Container>
     </section>
