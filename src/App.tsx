@@ -15,6 +15,7 @@ import HostVanPhotos from "./views/Host/HostVanPhotos";
 import HostVanPrice from "./views/Host/HostVanPrice";
 import Reviews from "./views/Host/Reviews";
 import HostLayout from "./components/HostLayout";
+import Login from "./views/Login";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             </Route>
             <Route path="reviews" element={<Reviews />} />
           </Route>
+          <Route path="login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
