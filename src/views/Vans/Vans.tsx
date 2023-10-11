@@ -5,10 +5,13 @@ import { VanTypes } from "../../types/enums";
 import { vanTypeButtonColor } from "../../utils/functions";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+import getVans from "../../api/api";
 
 const Vans = () => {
   const [vanData, setVanData] = useState<Van[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<null | Error | unknown>(null);
 
   const filterType = searchParams.get("type");
 
@@ -24,9 +27,18 @@ const Vans = () => {
   };
 
   useEffect(() => {
-    fetch("/api/vans")
-      .then((res) => res.json())
-      .then((data) => setVanData(data.vans));
+    const loadVans = async () => {
+      setLoading(true);
+      try {
+        const data = await getVans();
+        setVanData(data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadVans();
   }, []);
 
   const filteredVans = filterType
@@ -47,14 +59,18 @@ const Vans = () => {
       </Button>
     );
   });
+
   const displayVanData = filteredVans.map((van) => (
     <div key={van.id} className="vans__all-vans__van">
-      <Link to={`/vans/${van.id}`}>
+      <Link
+        to={`${van.id}`}
+        state={{ search: "?" + searchParams.toString(), filterType }}
+      >
         <div className="zoom-img">
           <img src={van.imageUrl} alt={`${van.name} Van Image`} />
         </div>
       </Link>
-      <Link to={`/vans/${van.id}`}>
+      <Link to={`${van.id}`}>
         <div className="vans__all-vans__van__text">
           <h3>{van.name}</h3>
           <div className="vans__all-vans__van__text__price van-name-price">
@@ -88,10 +104,12 @@ const Vans = () => {
             </button>
           )}
         </div>
-        {vanData.length > 0 ? (
-          <div className="vans__all-vans">{displayVanData}</div>
-        ) : (
+        {loading ? (
           <h3>Loading...</h3>
+        ) : error ? (
+          <h3>Error : {(error as Error).message}</h3>
+        ) : (
+          <div className="vans__all-vans">{displayVanData}</div>
         )}
       </Container>
     </section>

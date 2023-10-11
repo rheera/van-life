@@ -2,6 +2,7 @@ import { NavLink, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { FaRegUserCircle } from "react-icons/fa";
 
 const SiteNav = () => {
   const activeClass = ({ isActive }: { isActive: boolean }) => {
@@ -24,6 +25,9 @@ const SiteNav = () => {
             </NavLink>
             <NavLink className={activeClass} to="about" role="button">
               About
+            </NavLink>
+            <NavLink className={activeClass} to="login" role="button">
+              <FaRegUserCircle />
             </NavLink>
           </Nav>
         </Navbar.Collapse>
