@@ -7,6 +7,7 @@ import { HiOutlineArrowLongLeft } from "react-icons/hi2";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
+import { getVan } from "../../api/api";
 import "../../scss/van-detail.scss";
 
 const VanDetail = () => {
@@ -19,9 +20,7 @@ const VanDetail = () => {
   const typeOfGoBackVans = location.state?.filterType || "all";
 
   useEffect(() => {
-    fetch(`/api/vans/${params.id}`)
-      .then((res) => res.json())
-      .then((data) => setVan(data.vans));
+    getVan(params.id as string).then((data) => setVan(data));
   }, [params.id]);
 
   return (

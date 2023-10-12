@@ -2,15 +2,14 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Van } from "../../types/interfaces";
 import "../../scss/host-vans.scss";
+import { getHostVans } from "../../api/api";
 
 const HostVans = () => {
   const [vanData, setVanData] = useState<Van[]>([]);
   const [zoomVan, setZoomVan] = useState<string | number | null>(null);
 
   useEffect(() => {
-    fetch("/api/host/vans")
-      .then((res) => res.json())
-      .then((data) => setVanData(data.vans));
+    getHostVans("123").then((data) => setVanData(data));
   }, []);
 
   const displayVanData = vanData.map((van) => {
