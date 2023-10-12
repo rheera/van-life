@@ -9,6 +9,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "../../scss/host-van-detail.scss";
 import { ContextType } from "../../types/types";
+import { getVan } from "../../api/api";
 
 const HostVanDetail = () => {
   const [van, setVan] = useState<Van | null>(null);
@@ -19,9 +20,7 @@ const HostVanDetail = () => {
   };
 
   useEffect(() => {
-    fetch(`/api/host/vans/${id}`)
-      .then((res) => res.json())
-      .then((data) => setVan(data.vans));
+    getVan(id as string).then((data) => setVan(data));
   }, [id]);
 
   if (!van) {

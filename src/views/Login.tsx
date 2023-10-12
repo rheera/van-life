@@ -22,6 +22,8 @@ const Login = () => {
 
     loginUser(formData)
       .then((data) => {
+        // don't have a method to check user tokens etc. so for now do nothing with the data
+        data;
         setError(null);
         localStorage.setItem("isLoggedIn", "true");
         navigate(redirectPath, { replace: true });

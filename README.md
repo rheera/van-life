@@ -1,6 +1,6 @@
 # Van Life
 
-Part of Scrimba's Advanced React course. A site where people can rent out camper vans for roadtrip adventures. Goal is to practice working with React Router.
+Part of Scrimba's Advanced React course but updated to use TypeScript. A site where people can rent out camper vans for roadtrip adventures. Goal is to practice working with React Router. Live link: https://can-i-van.netlify.app/
 
 ## Table of Contents
 
@@ -14,11 +14,15 @@ Made with React, React Router, Vite, and TypeScript.
 
 ## Features to add
 
-- [ ] The app
+- [ ] Finish Host dashboard, reviews, and income page
+- [ ] Loading pages and error handling
 
 ## Stretch Goals
 
-- [x] None so far
+- [ ] Add real authentication
+- [ ] Stack multiple filters (ie. show rugged and luxury vans)
+- [ ] Log out button/page
+- [ ] Have a real graph for income page
 
 ## Quick start
 
