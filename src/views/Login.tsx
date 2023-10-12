@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from "../api/api";
 import "../scss/login.scss";
 
@@ -12,6 +12,9 @@ const Login = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [error, setError] = useState<null | Error | unknown>(null);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const redirectPath = location.state?.originalPath || "/host";
 
   const handleSumbit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,8 +22,9 @@ const Login = () => {
 
     loginUser(formData)
       .then((data) => {
-        console.log(data);
         setError(null);
+        localStorage.setItem("isLoggedIn", "true");
+        navigate(redirectPath, { replace: true });
       })
       .catch((e) => setError(e))
       .finally(() => setIsLoggingIn(false));
@@ -37,7 +41,7 @@ const Login = () => {
   return (
     <section className="login main-content">
       <Container className="site-page">
-        {location?.state.message && (
+        {location?.state?.message && (
           <h4 className="text-danger text-center">{location.state.message}</h4>
         )}
         <h3>Sign in to your account</h3>
