@@ -9,3 +9,8 @@ export interface Van {
   type: VanTypes;
   hostId: string | number;
 }
+
+export interface UserCredential {
+  email: string;
+  password: string;
+}

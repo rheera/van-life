@@ -3,14 +3,31 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { loginUser } from "../api/api";
 import "../scss/login.scss";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [error, setError] = useState<null | Error | unknown>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const redirectPath = location.state?.originalPath || "/host";
 
   const handleSumbit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+    setIsLoggingIn(true);
+
+    loginUser(formData)
+      .then((data) => {
+        setError(null);
+        localStorage.setItem("isLoggedIn", "true");
+        navigate(redirectPath, { replace: true });
+      })
+      .catch((e) => setError(e))
+      .finally(() => setIsLoggingIn(false));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +41,15 @@ const Login = () => {
   return (
     <section className="login main-content">
       <Container className="site-page">
+        {location?.state?.message && (
+          <h4 className="text-danger text-center">{location.state.message}</h4>
+        )}
         <h3>Sign in to your account</h3>
+        {(error as Error)?.message && (
+          <h4 className="text-danger text-center">
+            {(error as Error).message}
+          </h4>
+        )}
         <Form onSubmit={handleSumbit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <FloatingLabel
@@ -54,8 +79,13 @@ const Login = () => {
             </FloatingLabel>
           </Form.Group>
 
-          <Button className="big-button" variant="warning" type="submit">
-            Sign in
+          <Button
+            className="big-button"
+            variant="warning"
+            type="submit"
+            disabled={isLoggingIn}
+          >
+            {isLoggingIn ? "Logging In..." : "Log In"}
           </Button>
         </Form>
         <p>
