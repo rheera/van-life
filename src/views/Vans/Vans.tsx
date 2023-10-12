@@ -5,7 +5,7 @@ import { VanTypes } from "../../types/enums";
 import { vanTypeButtonColor } from "../../utils/functions";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import getVans from "../../api/api";
+import { getVans } from "../../api/api";
 
 const Vans = () => {
   const [vanData, setVanData] = useState<Van[]>([]);
