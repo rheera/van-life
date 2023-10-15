@@ -1,0 +1,10 @@
+.income {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  &__transactions {
+    &__title {
+      display: flex;
+    }
+  }
+}
