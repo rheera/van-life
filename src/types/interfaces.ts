@@ -14,3 +14,11 @@ export interface UserCredential {
   email: string;
   password: string;
 }
+
+export interface Review {
+  rating: number;
+  name: string;
+  date: string;
+  text: string;
+  id: string;
+}

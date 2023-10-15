@@ -1,0 +1,48 @@
+.dashboard {
+  &__card {
+    padding: 1.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      color: #161616;
+      h2 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin: 0;
+      }
+      h4 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0;
+      }
+      h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+        svg {
+          fill: #ff8c38;
+        }
+      }
+    }
+    &__right {
+      a {
+        color: #161616;
+        text-align: right;
+        font-weight: 500;
+        text-decoration: none;
+      }
+    }
+  }
+  &__income {
+    background: #ffead0;
+  }
+  &__review {
+    background: #ffddb2;
+  }
+  &__vans {
+  }
+}
