@@ -10,7 +10,7 @@ Part of Scrimba's Advanced React course but updated to use TypeScript. A site wh
 
 ## Tools
 
-Made with React, React Router, Vite, and TypeScript.
+Made with React, React Router, Vite, TypeScript, and ChartJS.
 
 ## Features to add
 
