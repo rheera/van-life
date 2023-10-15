@@ -1,0 +1,38 @@
+.review {
+  margin-top: 2rem;
+  &__rating {
+    svg {
+      fill: #b9b9b9;
+      width: 24px;
+      height: 24px;
+    }
+    .filled {
+      fill: #ff8c38;
+    }
+  }
+  &__info {
+    display: flex;
+    gap: 8px;
+    margin: 0.5rem 0 0;
+    p {
+      margin: 0;
+    }
+    .name {
+      color: #161616;
+      font-weight: 600;
+    }
+    .date {
+      color: #8c8c8c;
+      font-weight: 600;
+    }
+  }
+  &__text {
+    margin-top: 0.5rem;
+    color: #161616;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  hr {
+    margin: 1.5rem 0 0;
+  }
+}

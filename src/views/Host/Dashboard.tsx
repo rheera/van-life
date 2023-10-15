@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import HostVans from "./HostVans";
 import { AiFillStar } from "react-icons/ai";
 import "../../scss/dashboard.scss";
 import ListVans from "../../components/ListVans";
@@ -8,7 +7,7 @@ const Dashboard = () => (
   <>
     <section className="dashboard">
       <div className="dashboard__card dashboard__income">
-        <div className="dashboard__card__left">
+        <div className="dashboard__card__left last-30-days">
           <h2>Welcome!</h2>
           <p>
             Income last <span>30 days</span>

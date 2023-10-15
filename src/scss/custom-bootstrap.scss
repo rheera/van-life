@@ -95,5 +95,17 @@
   color: #fff;
   font-weight: 700;
 }
+.last-30-days {
+  p {
+    color: #4d4d4d;
+    font-weight: 500;
+    margin: 0;
+    span {
+      font-weight: 700;
+      text-decoration-line: underline;
+    }
+  }
+}
+
 @import "./sitenav.scss";
 @import "./vans.scss";
