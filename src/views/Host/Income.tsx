@@ -11,18 +11,18 @@ const Income = () => {
   ));
   return (
     <section className="income">
-      <h2>Income</h2>
+      <h2 className="host-title">Income</h2>
       <div className="last-30-days">
         <p>
           last <span>30 days</span>
         </p>
       </div>
-      <h4>$2,260</h4>
+      <h4>$4,645</h4>
 
       <IncomeGraph />
 
       <div className="income__transactions">
-        <div className="income__transaction__title">
+        <div className="income__transactions__title">
           <h3>Your transactions (3)</h3>
           <div className="last-30-days">
             <p>
