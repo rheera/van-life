@@ -12,7 +12,8 @@ const SiteNav = () => {
     <Navbar expand="sm" className="nav">
       <Container>
         <Navbar.Brand className="nav__brand" to="." as={Link}>
-          #VANLIFE
+          <img src="van-logo.png" alt="Van Life Logo" />
+          <h1>#VANLIFE</h1>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="site-navbar" />
         <Navbar.Collapse id="site-navbar" className="justify-content-end">
