@@ -3,8 +3,10 @@ import ListVans from "../../components/ListVans";
 import { getHostVans } from "../../api/api";
 import { useLoaderData } from "react-router-dom";
 import { Van } from "../../types/interfaces";
+import { requireAuth } from "../../utils/functions";
 
 export const loader = async () => {
+  await requireAuth();
   return getHostVans("123");
 };
 

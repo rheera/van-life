@@ -1,3 +1,4 @@
+import { redirect } from "react-router-dom";
 import { VanTypes } from "../types/enums";
 
 export const vanTypeButtonColor = (type: VanTypes) => {
@@ -6,4 +7,12 @@ export const vanTypeButtonColor = (type: VanTypes) => {
     : type === VanTypes.luxury
     ? "dark"
     : "success";
+};
+
+export const requireAuth = async () => {
+  const isAuthenticated = localStorage.getItem("isLoggedIn") || false;
+
+  if (!isAuthenticated) {
+    throw redirect("/login");
+  }
 };

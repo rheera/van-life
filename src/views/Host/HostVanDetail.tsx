@@ -9,8 +9,10 @@ import Navbar from "react-bootstrap/Navbar";
 import "../../scss/host-van-detail.scss";
 import { ContextType } from "../../types/types";
 import { getVan } from "../../api/api";
+import { requireAuth } from "../../utils/functions";
 
 export const loader = async ({ params }: { params: { id: string } }) => {
+  await requireAuth();
   return getVan(params.id as string);
 };
 
