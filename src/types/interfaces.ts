@@ -22,3 +22,9 @@ export interface Review {
   text: string;
   id: string;
 }
+
+export interface CustomError extends Error {
+  message: string;
+  statusText: string;
+  status: number;
+}

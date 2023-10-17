@@ -1,17 +1,20 @@
-import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import { Van } from "../../types/interfaces";
 import { VanTypes } from "../../types/enums";
 import { vanTypeButtonColor } from "../../utils/functions";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import { getVans } from "../../api/api";
+// import { getVans } from "../../api/api";
+import { getVans } from "../../api/mirage-api";
+
+export const loader = () => {
+  return getVans();
+};
 
 const Vans = () => {
-  const [vanData, setVanData] = useState<Van[]>([]);
+  // const [vanData, setVanData] = useState<Van[]>([]);
+  const vanData = useLoaderData() as Van[];
   const [searchParams, setSearchParams] = useSearchParams();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<null | Error | unknown>(null);
 
   const filterType = searchParams.get("type");
 
@@ -25,21 +28,6 @@ const Vans = () => {
       return prevParams;
     });
   };
-
-  useEffect(() => {
-    const loadVans = async () => {
-      setLoading(true);
-      try {
-        const data = await getVans();
-        setVanData(data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadVans();
-  }, []);
 
   const filteredVans = filterType
     ? vanData.filter(({ type }) => type === filterType)
@@ -104,9 +92,7 @@ const Vans = () => {
             </button>
           )}
         </div>
-        {loading ? (
-          <h3>Loading...</h3>
-        ) : error ? (
+        {error ? (
           <h3>Error : {(error as Error).message}</h3>
         ) : (
           <div className="vans__all-vans">{displayVanData}</div>
