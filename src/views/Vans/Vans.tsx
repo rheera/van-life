@@ -4,15 +4,19 @@ import { VanTypes } from "../../types/enums";
 import { vanTypeButtonColor } from "../../utils/functions";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-// import { getVans } from "../../api/api";
-import { getVans } from "../../api/mirage-api";
+import { getVans } from "../../api/api";
+// import { getVans } from "../../api/mirage-api";
 
 export const loader = () => {
+  // throw {
+  //   message: "fat error",
+  //   statusText: "we need help",
+  //   status: 500,
+  // };
+
   return getVans();
 };
-
 const Vans = () => {
-  // const [vanData, setVanData] = useState<Van[]>([]);
   const vanData = useLoaderData() as Van[];
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -92,11 +96,7 @@ const Vans = () => {
             </button>
           )}
         </div>
-        {error ? (
-          <h3>Error : {(error as Error).message}</h3>
-        ) : (
-          <div className="vans__all-vans">{displayVanData}</div>
-        )}
+        <div className="vans__all-vans">{displayVanData}</div>
       </Container>
     </section>
   );

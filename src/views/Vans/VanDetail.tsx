@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
 import { Van } from "../../types/interfaces";
 import { vanTypeButtonColor } from "../../utils/functions";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useLoaderData } from "react-router-dom";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -10,18 +8,17 @@ import Image from "react-bootstrap/Image";
 import { getVan } from "../../api/api";
 import "../../scss/van-detail.scss";
 
+export const loader = ({ params }: { params: { id: string } }) => {
+  return getVan(params.id);
+};
+
 const VanDetail = () => {
-  const params = useParams();
-  const [van, setVan] = useState<Van | null>(null);
   const location = useLocation();
+  const van = useLoaderData() as Van;
 
   const search = location.state?.search || "";
 
   const typeOfGoBackVans = location.state?.filterType || "all";
-
-  useEffect(() => {
-    getVan(params.id as string).then((data) => setVan(data));
-  }, [params.id]);
 
   return (
     <section className="van-detail main-content">

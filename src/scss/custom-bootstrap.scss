@@ -112,5 +112,9 @@
   font-size: 2.25rem;
   font-weight: 700;
 }
+
+.max-700-wide {
+  max-width: 700px;
+}
 @import "./sitenav.scss";
 @import "./vans.scss";

@@ -9,7 +9,7 @@ import Home from "./views/Home";
 import About from "./views/About";
 import NotFound from "./views/NotFound";
 import Vans, { loader as vansLoader } from "./views/Vans/Vans";
-import VanDetail from "./views/Vans/VanDetail";
+import VanDetail, { loader as vanDetailLoader } from "./views/Vans/VanDetail";
 import "./scss/app.scss";
 import Dashboard from "./views/Host/Dashboard";
 import Income from "./views/Host/Income";
@@ -35,7 +35,12 @@ const router = createBrowserRouter(
         element={<Vans />}
         errorElement={<Error />}
       />
-      <Route path="vans/:id" element={<VanDetail />} errorElement={<Error />} />
+      <Route
+        path="vans/:id"
+        element={<VanDetail />}
+        loader={vanDetailLoader}
+        errorElement={<Error />}
+      />
 
       {/* Host Routes */}
       <Route element={<AuthRequired />}>

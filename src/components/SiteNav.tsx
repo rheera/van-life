@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { FaRegUserCircle } from "react-icons/fa";
+import logo from "../assets/images/van-logo.png";
 
 const SiteNav = () => {
   const activeClass = ({ isActive }: { isActive: boolean }) => {
@@ -12,7 +13,7 @@ const SiteNav = () => {
     <Navbar expand="sm" className="nav">
       <Container>
         <Navbar.Brand className="nav__brand" to="." as={Link}>
-          <img src="van-logo.png" alt="Van Life Logo" />
+          <img src={logo} alt="Van Life Logo" />
           <h1>#VANLIFE</h1>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="site-navbar" />
