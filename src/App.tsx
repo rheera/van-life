@@ -12,9 +12,9 @@ import NotFound from "./views/NotFound";
 import Vans, { loader as vansLoader } from "./views/Vans/Vans";
 import VanDetail, { loader as vanDetailLoader } from "./views/Vans/VanDetail";
 import "./scss/app.scss";
-import Dashboard from "./views/Host/Dashboard";
+import Dashboard, { loader as dashboardLoader } from "./views/Host/Dashboard";
 import Income from "./views/Host/Income";
-import HostVans from "./views/Host/HostVans";
+import HostVans, { loader as hostVansLoader } from "./views/Host/HostVans";
 import HostVanDetail, {
   loader as hostVanLoader,
 } from "./views/Host/HostVanDetail";
@@ -48,9 +48,14 @@ const router = createBrowserRouter(
       {/* Host Routes */}
       <Route element={<AuthRequired />}>
         <Route path="host" element={<HostLayout />}>
-          <Route index element={<Dashboard />} />
+          <Route index element={<Dashboard />} loader={dashboardLoader} />
           <Route path="income" element={<Income />} />
-          <Route path="vans" element={<HostVans />} errorElement={<Error />} />
+          <Route
+            path="vans"
+            loader={hostVansLoader}
+            element={<HostVans />}
+            errorElement={<Error />}
+          />
           <Route
             path="vans/:id"
             loader={hostVanLoader as unknown as LoaderFunction}

@@ -51,7 +51,7 @@ export async function getVan(id: string): Promise<Van> {
   });
 }
 
-export async function getHostVans(hostId: string) {
+export async function getHostVans(hostId: string): Promise<Van[]> {
   const q = query(vansCollectionRef, where("hostId", "==", hostId));
   const snapshot = await getDocs(q);
   const vans = snapshot.docs.map((doc) => ({
