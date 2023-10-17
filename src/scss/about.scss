@@ -1,9 +1,13 @@
 .about {
+  .site-page {
+    max-width: 800px;
+  }
   img {
     width: 100%;
     max-height: 400px;
     object-fit: cover;
     object-position: 50% 20%;
+    aspect-ratio: 2.34;
   }
   h2 {
     margin-bottom: 32px;
@@ -14,7 +18,7 @@
     h4 {
       margin: 0;
     }
-    button {
+    a {
       margin-top: 25px;
     }
   }

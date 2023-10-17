@@ -36,11 +36,19 @@ export async function getVans(): Promise<Van[]> {
 
 export async function getVan(id: string): Promise<Van> {
   const docRef = doc(db, "vans", id);
-  const snapshot = await getDoc(docRef);
-  return {
-    ...snapshot.data(),
-    id: id,
-  } as Van;
+  return await getDoc(docRef).then((snapshot) => {
+    if (snapshot.exists()) {
+      return {
+        ...snapshot.data(),
+        id: id,
+      } as Van;
+    } else {
+      throw {
+        message: "Couldn't find the van you were looking for",
+        statusText: `Maybe van ${id} doesn't exist`,
+      };
+    }
+  });
 }
 
 export async function getHostVans(hostId: string) {

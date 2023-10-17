@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { Outlet, useParams } from "react-router";
+import { Outlet } from "react-router";
 import { Van } from "../../types/interfaces";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLoaderData } from "react-router-dom";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
 import { vanTypeButtonColor } from "../../utils/functions";
 import Button from "react-bootstrap/Button";
@@ -11,21 +10,16 @@ import "../../scss/host-van-detail.scss";
 import { ContextType } from "../../types/types";
 import { getVan } from "../../api/api";
 
+export const loader = async ({ params }: { params: { id: string } }) => {
+  return getVan(params.id as string);
+};
+
 const HostVanDetail = () => {
-  const [van, setVan] = useState<Van | null>(null);
-  const { id } = useParams();
+  const van = useLoaderData() as Van;
 
   const activeClass = ({ isActive }: { isActive: boolean }) => {
     return isActive ? "nav-link nav__link active-link" : "nav-link nav__link";
   };
-
-  useEffect(() => {
-    getVan(id as string).then((data) => setVan(data));
-  }, [id]);
-
-  if (!van) {
-    return <h2>Loading...</h2>;
-  }
 
   return (
     <section className="host-van">
