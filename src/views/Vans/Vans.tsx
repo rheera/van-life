@@ -7,13 +7,13 @@ import Button from "react-bootstrap/Button";
 import { getVans } from "../../api/api";
 // import { getVans } from "../../api/mirage-api";
 
-export const loader = () => {
+export const loader = async () => {
   // throw {
   //   message: "fat error",
   //   statusText: "we need help",
   //   status: 500,
   // };
-
+  // throw new Response("Not Found", { status: 411 });
   return getVans();
 };
 const Vans = () => {

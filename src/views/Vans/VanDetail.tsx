@@ -8,7 +8,7 @@ import Image from "react-bootstrap/Image";
 import { getVan } from "../../api/api";
 import "../../scss/van-detail.scss";
 
-export const loader = ({ params }: { params: { id: string } }) => {
+export const loader = async ({ params }: { params: { id: string } }) => {
   return getVan(params.id);
 };
 

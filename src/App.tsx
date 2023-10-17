@@ -3,6 +3,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
   Route,
+  LoaderFunction,
 } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./views/Home";
@@ -14,7 +15,9 @@ import "./scss/app.scss";
 import Dashboard from "./views/Host/Dashboard";
 import Income from "./views/Host/Income";
 import HostVans from "./views/Host/HostVans";
-import HostVanDetail from "./views/Host/HostVanDetail";
+import HostVanDetail, {
+  loader as hostVanLoader,
+} from "./views/Host/HostVanDetail";
 import HostVanInfo from "./views/Host/HostVanInfo";
 import HostVanPhotos from "./views/Host/HostVanPhotos";
 import HostVanPrice from "./views/Host/HostVanPrice";
@@ -38,17 +41,22 @@ const router = createBrowserRouter(
       <Route
         path="vans/:id"
         element={<VanDetail />}
-        loader={vanDetailLoader}
+        loader={vanDetailLoader as unknown as LoaderFunction}
         errorElement={<Error />}
       />
 
       {/* Host Routes */}
       <Route element={<AuthRequired />}>
-        <Route path="host" element={<HostLayout />} errorElement={<Error />}>
+        <Route path="host" element={<HostLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="income" element={<Income />} />
-          <Route path="vans" element={<HostVans />} />
-          <Route path="vans/:id" element={<HostVanDetail />}>
+          <Route path="vans" element={<HostVans />} errorElement={<Error />} />
+          <Route
+            path="vans/:id"
+            loader={hostVanLoader as unknown as LoaderFunction}
+            element={<HostVanDetail />}
+            errorElement={<Error />}
+          >
             <Route index element={<HostVanInfo />} />
             <Route path="price" element={<HostVanPrice />} />
             <Route path="photos" element={<HostVanPhotos />} />
