@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useState } from "react";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
-import { loginUser } from "../api/api";
+import { loginUser } from "../utils/functions";
 import "../scss/login.scss";
 
 export const loader = ({ request }: { request: Request }): string | null => {
@@ -29,7 +29,8 @@ const Login = () => {
     loginUser(formData)
       .then((data) => {
         // don't have a method to check user tokens etc. so for now do nothing with the data
-        data;
+        console.log(data);
+
         setError(null);
         localStorage.setItem("isLoggedIn", "true");
         navigate(redirectPath, { replace: true });
