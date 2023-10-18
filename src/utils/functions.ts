@@ -39,7 +39,7 @@ export async function loginUser(creds: UserCredential) {
       } else {
         reject({ message: "Invalid email or password" });
       }
-    }, 3000);
+    }, 300);
   });
 
   return await res;

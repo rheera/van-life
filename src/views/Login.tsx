@@ -3,11 +3,23 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useState } from "react";
-import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import {
+  redirect,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { loginUser } from "../utils/functions";
 import "../scss/login.scss";
 
-export const loader = ({ request }: { request: Request }): string | null => {
+export const loader = ({
+  request,
+}: {
+  request: Request;
+}): string | null | Response => {
+  if (localStorage.getItem("isLoggedIn")) {
+    return redirect("/host");
+  }
   return new URL(request.url).searchParams.get("message");
 };
 
@@ -29,8 +41,7 @@ const Login = () => {
     loginUser(formData)
       .then((data) => {
         // don't have a method to check user tokens etc. so for now do nothing with the data
-        console.log(data);
-
+        data;
         setError(null);
         localStorage.setItem("isLoggedIn", "true");
         navigate(redirectPath, { replace: true });
