@@ -23,7 +23,7 @@ import HostVanPhotos from "./views/Host/HostVanPhotos";
 import HostVanPrice from "./views/Host/HostVanPrice";
 import Reviews from "./views/Host/Reviews";
 import HostLayout from "./components/HostLayout";
-import Login from "./views/Login";
+import Login, { loader as loginLoader } from "./views/Login";
 import Error from "./components/Error";
 import { requireAuth } from "./utils/functions";
 
@@ -92,7 +92,7 @@ const router = createBrowserRouter(
         />
       </Route>
 
-      <Route path="login" element={<Login />} />
+      <Route path="login" element={<Login />} loader={loginLoader} />
       <Route path="*" element={<NotFound />} />
     </Route>
   )

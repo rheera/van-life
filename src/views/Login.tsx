@@ -3,9 +3,13 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from "../api/api";
 import "../scss/login.scss";
+
+export const loader = ({ request }: { request: Request }): string | null => {
+  return new URL(request.url).searchParams.get("message");
+};
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -13,6 +17,8 @@ const Login = () => {
   const [error, setError] = useState<null | Error | unknown>(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const message = useLoaderData() as string | null;
 
   const redirectPath = location.state?.originalPath || "/host";
 
@@ -43,9 +49,7 @@ const Login = () => {
   return (
     <section className="login main-content">
       <Container className="site-page">
-        {location?.state?.message && (
-          <h4 className="text-danger text-center">{location.state.message}</h4>
-        )}
+        {message && <h4 className="text-danger text-center">{message}</h4>}
         <h3>Sign in to your account</h3>
         {(error as Error)?.message && (
           <h4 className="text-danger text-center">

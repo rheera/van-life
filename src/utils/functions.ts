@@ -13,7 +13,7 @@ export const requireAuth = async () => {
   const isAuthenticated = localStorage.getItem("isLoggedIn") || false;
 
   if (!isAuthenticated) {
-    return redirect("/login");
+    return redirect("/login?message=You must log in first");
   }
   return null;
 };
