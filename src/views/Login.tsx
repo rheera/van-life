@@ -8,9 +8,11 @@ import {
   useLoaderData,
   useLocation,
   useNavigate,
+  Form as RouterForm,
 } from "react-router-dom";
 import { loginUser } from "../utils/functions";
 import "../scss/login.scss";
+import { UserCredential } from "../types/interfaces";
 
 export const loader = ({
   request,
@@ -20,11 +22,28 @@ export const loader = ({
   if (localStorage.getItem("isLoggedIn")) {
     return redirect("/host");
   }
+
   return new URL(request.url).searchParams.get("message");
 };
 
+export const action = async ({ request }: { request: Request }) => {
+  const formData = await request.formData();
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+  const data = await loginUser({ email, password });
+  console.log(data);
+
+  localStorage.setItem("isLoggedIn", "true");
+  return redirect("/host");
+  // a way to make all the entries from the form data become one object
+  /*
+  const userData = Object.fromEntries(
+    formData.entries()
+  ) as unknown as UserCredential;
+  */
+};
+
 const Login = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [error, setError] = useState<null | Error | unknown>(null);
   const location = useLocation();
@@ -37,6 +56,7 @@ const Login = () => {
   const handleSumbit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoggingIn(true);
+    setError(null);
 
     loginUser(formData)
       .then((data) => {
@@ -50,14 +70,6 @@ const Login = () => {
       .finally(() => setIsLoggingIn(false));
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
   return (
     <section className="login main-content">
       <Container className="site-page">
@@ -68,7 +80,7 @@ const Login = () => {
             {(error as Error).message}
           </h4>
         )}
-        <Form onSubmit={handleSumbit}>
+        <RouterForm replace method="post">
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <FloatingLabel
               controlId="floatingInput"
@@ -78,8 +90,6 @@ const Login = () => {
               <Form.Control
                 type="email"
                 placeholder="Enter email"
-                onChange={handleChange}
-                value={formData.email}
                 name="email"
               />
             </FloatingLabel>
@@ -90,8 +100,6 @@ const Login = () => {
               <Form.Control
                 type="password"
                 placeholder="Password"
-                onChange={handleChange}
-                value={formData.password}
                 name="password"
               />
             </FloatingLabel>
@@ -105,7 +113,7 @@ const Login = () => {
           >
             {isLoggingIn ? "Logging In..." : "Log In"}
           </Button>
-        </Form>
+        </RouterForm>
         <p>
           Don’t have an account? <a href="#">Create one now</a>
         </p>
