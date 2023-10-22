@@ -1,7 +1,14 @@
 import { Outlet } from "react-router";
 import { Van } from "../../types/interfaces";
 import { Suspense } from "react";
-import { NavLink, Link, useLoaderData, defer, Await } from "react-router-dom";
+import {
+  NavLink,
+  Link,
+  useLoaderData,
+  defer,
+  Await,
+  LoaderFunctionArgs,
+} from "react-router-dom";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
 import { vanTypeButtonColor } from "../../utils/functions";
 import Button from "react-bootstrap/Button";
@@ -12,19 +19,13 @@ import { ContextType } from "../../types/types";
 import { getVan } from "../../api/api";
 import { requireAuth } from "../../utils/functions";
 
-export const loader = async ({
-  params,
-  request,
-}: {
-  params: { id: string };
-  request: Request;
-}) => {
+export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   await requireAuth(request);
   return defer({ van: getVan(params.id as string) });
 };
 
 const HostVanDetail = () => {
-  const van = useLoaderData();
+  const van = useLoaderData() as { van: Promise<Van> };
 
   const activeClass = ({ isActive }: { isActive: boolean }) => {
     return isActive ? "nav-link nav__link active-link" : "nav-link nav__link";
@@ -83,7 +84,7 @@ const HostVanDetail = () => {
       </Link>
       <div className="host-van__tile">
         <Suspense fallback={<h2>Loading your van...</h2>}>
-          <Await resolve={(van as { van: Van }).van}>{renderVan}</Await>
+          <Await resolve={van.van}>{renderVan}</Await>
         </Suspense>
       </div>
     </section>
