@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Van } from "../types/interfaces";
-import { getHostVans } from "../api/api";
 
-const ListVans = ({ amtOfVansToShow = 10 }) => {
-  const [vanData, setVanData] = useState<Van[]>([]);
+const ListVans = ({
+  amtOfVansToShow = 10,
+  vans,
+}: {
+  amtOfVansToShow: number;
+  vans: Van[];
+}) => {
   const [zoomVan, setZoomVan] = useState<string | number | null>(null);
 
-  useEffect(() => {
-    getHostVans("123").then((data) => setVanData(data));
-  }, []);
-
-  const displayVanData = vanData.slice(0, amtOfVansToShow).map((van) => {
+  const displayVanData = vans.slice(0, amtOfVansToShow).map((van) => {
     return (
       <Link
         onMouseEnter={() => setZoomVan(van.id)}
@@ -36,11 +36,7 @@ const ListVans = ({ amtOfVansToShow = 10 }) => {
     );
   });
 
-  return vanData.length > 0 ? (
-    <div className="host-vans__all-vans">{displayVanData}</div>
-  ) : (
-    <h3>Loading...</h3>
-  );
+  return <div className="host-vans__all-vans">{displayVanData}</div>;
 };
 
 export default ListVans;

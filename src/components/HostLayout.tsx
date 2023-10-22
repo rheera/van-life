@@ -8,6 +8,10 @@ const HostLayout = () => {
   const activeClass = ({ isActive }: { isActive: boolean }) => {
     return isActive ? "nav-link nav__link active-link" : "nav-link nav__link";
   };
+
+  const logout = () => {
+    localStorage.removeItem("isLoggedIn");
+  };
   return (
     <Container className="host site-page main-content">
       <Navbar expand className="dashboard-nav">
@@ -27,6 +31,11 @@ const HostLayout = () => {
             </NavLink>
             <NavLink to="income" className={activeClass}>
               Income
+            </NavLink>
+          </Nav>
+          <Nav>
+            <NavLink to="/login" onClick={logout} className={activeClass}>
+              Logout
             </NavLink>
           </Nav>
         </Navbar.Collapse>

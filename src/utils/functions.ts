@@ -1,4 +1,6 @@
+import { redirect } from "react-router-dom";
 import { VanTypes } from "../types/enums";
+import { UserCredential } from "../types/interfaces";
 
 export const vanTypeButtonColor = (type: VanTypes) => {
   return type === VanTypes.simple
@@ -7,3 +9,40 @@ export const vanTypeButtonColor = (type: VanTypes) => {
     ? "dark"
     : "success";
 };
+
+export const requireAuth = async (request: Request) => {
+  const isAuthenticated = localStorage.getItem("isLoggedIn") || false;
+  const pathname = new URL(request.url).pathname;
+  if (!isAuthenticated) {
+    return redirect(
+      `/login?message=You must log in first&redirectTo=${pathname}`
+    );
+  }
+  return null;
+};
+const checkUser = (creds: UserCredential) => {
+  if (creds.email === "b@b.com" && creds.password === "p123") {
+    return true;
+  } else {
+    return false;
+  }
+};
+export async function loginUser(creds: UserCredential) {
+  const res = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (checkUser(creds)) {
+        resolve({
+          type: "Success ✅",
+          data: {
+            user: creds.email,
+            token: "Enjoy your pizza, here's your tokens.",
+          },
+        });
+      } else {
+        reject({ message: "Invalid email or password" });
+      }
+    }, 300);
+  });
+
+  return await res;
+}

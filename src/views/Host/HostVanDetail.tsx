@@ -9,8 +9,16 @@ import Navbar from "react-bootstrap/Navbar";
 import "../../scss/host-van-detail.scss";
 import { ContextType } from "../../types/types";
 import { getVan } from "../../api/api";
+import { requireAuth } from "../../utils/functions";
 
-export const loader = async ({ params }: { params: { id: string } }) => {
+export const loader = async ({
+  params,
+  request,
+}: {
+  params: { id: string };
+  request: Request;
+}) => {
+  await requireAuth(request);
   return getVan(params.id as string);
 };
 
@@ -23,7 +31,7 @@ const HostVanDetail = () => {
 
   return (
     <section className="host-van">
-      <Link to=".." relative="path" className="underline-link">
+      <Link to="/host/vans" className="underline-link">
         <HiOutlineArrowLongLeft />
         Back to all vans
       </Link>
