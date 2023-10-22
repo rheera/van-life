@@ -6,8 +6,8 @@ import { getHostVans } from "../../api/api";
 import { Van } from "../../types/interfaces";
 import { requireAuth } from "../../utils/functions";
 
-export const loader = async () => {
-  await requireAuth();
+export const loader = async ({ request }: { request: Request }) => {
+  await requireAuth(request);
   return getHostVans("123");
 };
 

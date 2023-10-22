@@ -2,17 +2,15 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import { useState } from "react";
 import {
   redirect,
   useLoaderData,
-  useLocation,
-  useNavigate,
   Form as RouterForm,
+  useActionData,
+  useNavigation,
 } from "react-router-dom";
 import { loginUser } from "../utils/functions";
 import "../scss/login.scss";
-import { UserCredential } from "../types/interfaces";
 
 export const loader = ({
   request,
@@ -30,11 +28,28 @@ export const action = async ({ request }: { request: Request }) => {
   const formData = await request.formData();
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-  const data = await loginUser({ email, password });
-  console.log(data);
+  const pathname =
+    new URL(request.url).searchParams.get("redirectTo") || "/host";
+  // try {
+  //   await loginUser({ email, password });
+  //   localStorage.setItem("isLoggedIn", "true");
+  //   return redirect("/host");
+  // } catch (e) {
+  //   return e.message;
+  // }
 
-  localStorage.setItem("isLoggedIn", "true");
-  return redirect("/host");
+  // both of these ways work ^
+  const login = await loginUser({ email, password })
+    .then((data) => {
+      data;
+      localStorage.setItem("isLoggedIn", "true");
+      return redirect(pathname);
+    })
+    .catch((e) => {
+      return e.message;
+    });
+  return login;
+
   // a way to make all the entries from the form data become one object
   /*
   const userData = Object.fromEntries(
@@ -44,41 +59,18 @@ export const action = async ({ request }: { request: Request }) => {
 };
 
 const Login = () => {
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const [error, setError] = useState<null | Error | unknown>(null);
-  const location = useLocation();
-  const navigate = useNavigate();
-
+  const errorMessage = useActionData() as string;
   const message = useLoaderData() as string | null;
-
-  const redirectPath = location.state?.originalPath || "/host";
-
-  const handleSumbit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoggingIn(true);
-    setError(null);
-
-    loginUser(formData)
-      .then((data) => {
-        // don't have a method to check user tokens etc. so for now do nothing with the data
-        data;
-        setError(null);
-        localStorage.setItem("isLoggedIn", "true");
-        navigate(redirectPath, { replace: true });
-      })
-      .catch((e) => setError(e))
-      .finally(() => setIsLoggingIn(false));
-  };
+  const navigation = useNavigation();
+  const isLoggingIn = navigation.state;
 
   return (
     <section className="login main-content">
       <Container className="site-page">
         {message && <h4 className="text-danger text-center">{message}</h4>}
         <h3>Sign in to your account</h3>
-        {(error as Error)?.message && (
-          <h4 className="text-danger text-center">
-            {(error as Error).message}
-          </h4>
+        {errorMessage && (
+          <h4 className="text-danger text-center">{errorMessage}</h4>
         )}
         <RouterForm replace method="post">
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -109,9 +101,9 @@ const Login = () => {
             className="big-button"
             variant="warning"
             type="submit"
-            disabled={isLoggingIn}
+            disabled={isLoggingIn === "submitting"}
           >
-            {isLoggingIn ? "Logging In..." : "Log In"}
+            {isLoggingIn === "submitting" ? "Logging In..." : "Log In"}
           </Button>
         </RouterForm>
         <p>

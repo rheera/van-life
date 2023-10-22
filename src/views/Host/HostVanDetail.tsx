@@ -11,8 +11,14 @@ import { ContextType } from "../../types/types";
 import { getVan } from "../../api/api";
 import { requireAuth } from "../../utils/functions";
 
-export const loader = async ({ params }: { params: { id: string } }) => {
-  await requireAuth();
+export const loader = async ({
+  params,
+  request,
+}: {
+  params: { id: string };
+  request: Request;
+}) => {
+  await requireAuth(request);
   return getVan(params.id as string);
 };
 

@@ -10,11 +10,13 @@ export const vanTypeButtonColor = (type: VanTypes) => {
     : "success";
 };
 
-export const requireAuth = async () => {
+export const requireAuth = async (request: Request) => {
   const isAuthenticated = localStorage.getItem("isLoggedIn") || false;
-
+  const pathname = new URL(request.url).pathname;
   if (!isAuthenticated) {
-    return redirect("/login?message=You must log in first");
+    return redirect(
+      `/login?message=You must log in first&redirectTo=${pathname}`
+    );
   }
   return null;
 };
