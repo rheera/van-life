@@ -24,7 +24,7 @@ export const loader = async () => {
   return defer({ vans: getVans() });
 };
 const Vans = () => {
-  const vanDataPromise = useLoaderData();
+  const vanDataPromise = useLoaderData() as { vans: Promise<Van[]> };
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filterType = searchParams.get("type");
@@ -107,9 +107,7 @@ const Vans = () => {
         </div>
         <div className="vans__all-vans">
           <Suspense fallback={<h2>Loading Vans...</h2>}>
-            <Await resolve={(vanDataPromise as { vans: Van[] }).vans}>
-              {renderLoadedVans}
-            </Await>
+            <Await resolve={vanDataPromise.vans}>{renderLoadedVans}</Await>
           </Suspense>
         </div>
       </Container>

@@ -12,12 +12,12 @@ export const loader = async ({ request }: { request: Request }) => {
 };
 
 const HostVans = () => {
-  const vanData = useLoaderData();
+  const vanData = useLoaderData() as { vans: Promise<Van[]> };
   return (
     <section className="host-vans">
       <h2>Your listed vans</h2>
       <Suspense fallback={<h2>Loading your vans...</h2>}>
-        <Await resolve={(vanData as { vans: Van[] }).vans}>
+        <Await resolve={vanData.vans}>
           <ListVans amtOfVansToShow={10} />
         </Await>
       </Suspense>

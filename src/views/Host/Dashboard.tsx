@@ -13,7 +13,7 @@ export const loader = async ({ request }: { request: Request }) => {
 };
 
 const Dashboard = () => {
-  const vanData = useLoaderData();
+  const vanData = useLoaderData() as { vans: Promise<Van[]> };
 
   return (
     <>
@@ -49,7 +49,7 @@ const Dashboard = () => {
           </div>
         </div>
         <Suspense fallback={<h2>Loading your vans...</h2>}>
-          <Await resolve={(vanData as { vans: Van[] }).vans}>
+          <Await resolve={vanData.vans}>
             <ListVans amtOfVansToShow={2} />
           </Await>
         </Suspense>

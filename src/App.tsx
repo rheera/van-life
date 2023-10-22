@@ -3,7 +3,6 @@ import {
   createRoutesFromElements,
   RouterProvider,
   Route,
-  LoaderFunction,
 } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./views/Home";
@@ -44,7 +43,7 @@ const router = createBrowserRouter(
       <Route
         path="vans/:id"
         element={<VanDetail />}
-        loader={vanDetailLoader as unknown as LoaderFunction}
+        loader={vanDetailLoader}
         errorElement={<Error />}
       />
 
@@ -53,6 +52,7 @@ const router = createBrowserRouter(
         path="host"
         element={<HostLayout />}
         loader={async ({ request }) => await requireAuth(request)}
+        errorElement={<Error />}
       >
         <Route index element={<Dashboard />} loader={dashboardLoader} />
         <Route
@@ -68,7 +68,7 @@ const router = createBrowserRouter(
         />
         <Route
           path="vans/:id"
-          loader={hostVanLoader as unknown as LoaderFunction}
+          loader={hostVanLoader}
           element={<HostVanDetail />}
           errorElement={<Error />}
         >

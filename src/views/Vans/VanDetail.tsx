@@ -6,6 +6,7 @@ import {
   useLoaderData,
   defer,
   Await,
+  ActionFunctionArgs,
 } from "react-router-dom";
 import { Suspense } from "react";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
@@ -15,13 +16,13 @@ import Image from "react-bootstrap/Image";
 import { getVan } from "../../api/api";
 import "../../scss/van-detail.scss";
 
-export const loader = async ({ params }: { params: { id: string } }) => {
-  return defer({ van: getVan(params.id) });
+export const loader = async ({ params }: ActionFunctionArgs) => {
+  return defer({ van: getVan(params.id as string) });
 };
 
 const VanDetail = () => {
   const location = useLocation();
-  const vanPromise = useLoaderData();
+  const vanPromise = useLoaderData() as { van: Promise<Van> };
 
   const search = location.state?.search || "";
 
@@ -35,7 +36,7 @@ const VanDetail = () => {
           Back to {typeOfGoBackVans} vans
         </Link>
         <Suspense fallback={<h2>Loading Van...</h2>}>
-          <Await resolve={(vanPromise as { van: Van }).van}>
+          <Await resolve={vanPromise.van}>
             {(van) => (
               <>
                 <Image src={van.imageUrl} alt="Van Image" fluid />
