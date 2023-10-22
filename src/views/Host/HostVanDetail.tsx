@@ -31,7 +31,7 @@ const HostVanDetail = () => {
 
   return (
     <section className="host-van">
-      <Link to=".." relative="path" className="underline-link">
+      <Link to="/host/vans" className="underline-link">
         <HiOutlineArrowLongLeft />
         Back to all vans
       </Link>
