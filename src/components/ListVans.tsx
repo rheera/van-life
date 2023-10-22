@@ -1,14 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useAsyncValue } from "react-router-dom";
 import { Van } from "../types/interfaces";
 
-const ListVans = ({
-  amtOfVansToShow = 10,
-  vans,
-}: {
-  amtOfVansToShow: number;
-  vans: Van[];
-}) => {
+const ListVans = ({ amtOfVansToShow = 10 }: { amtOfVansToShow: number }) => {
+  const vans = useAsyncValue() as Van[];
+
   const [zoomVan, setZoomVan] = useState<string | number | null>(null);
 
   const displayVanData = vans.slice(0, amtOfVansToShow).map((van) => {

@@ -1,4 +1,5 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Suspense } from "react";
+import { Link, useLoaderData, defer, Await } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import "../../scss/dashboard.scss";
 import ListVans from "../../components/ListVans";
@@ -8,11 +9,11 @@ import { requireAuth } from "../../utils/functions";
 
 export const loader = async ({ request }: { request: Request }) => {
   await requireAuth(request);
-  return getHostVans("123");
+  return defer({ vans: getHostVans("123") });
 };
 
 const Dashboard = () => {
-  const vanData = useLoaderData() as Van[];
+  const vanData = useLoaderData();
 
   return (
     <>
@@ -47,7 +48,11 @@ const Dashboard = () => {
             <Link to="vans">View all</Link>
           </div>
         </div>
-        <ListVans amtOfVansToShow={2} vans={vanData} />
+        <Suspense fallback={<h2>Loading your vans...</h2>}>
+          <Await resolve={(vanData as { vans: Van[] }).vans}>
+            <ListVans amtOfVansToShow={2} />
+          </Await>
+        </Suspense>
       </section>
     </>
   );

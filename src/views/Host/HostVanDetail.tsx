@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 import { Van } from "../../types/interfaces";
-import { NavLink, Link, useLoaderData } from "react-router-dom";
+import { Suspense } from "react";
+import { NavLink, Link, useLoaderData, defer, Await } from "react-router-dom";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
 import { vanTypeButtonColor } from "../../utils/functions";
 import Button from "react-bootstrap/Button";
@@ -19,23 +20,19 @@ export const loader = async ({
   request: Request;
 }) => {
   await requireAuth(request);
-  return getVan(params.id as string);
+  return defer({ van: getVan(params.id as string) });
 };
 
 const HostVanDetail = () => {
-  const van = useLoaderData() as Van;
+  const van = useLoaderData();
 
   const activeClass = ({ isActive }: { isActive: boolean }) => {
     return isActive ? "nav-link nav__link active-link" : "nav-link nav__link";
   };
 
-  return (
-    <section className="host-van">
-      <Link to="/host/vans" className="underline-link">
-        <HiOutlineArrowLongLeft />
-        Back to all vans
-      </Link>
-      <div className="host-van__tile">
+  function renderVan(van: Van) {
+    return (
+      <>
         <div className="host-van__tile__top">
           <img src={van.imageUrl} alt="Van Picture" />
           <div className="host-van__tile__top__text">
@@ -74,6 +71,20 @@ const HostVanDetail = () => {
           </Navbar.Collapse>
         </Navbar>
         <Outlet context={{ van } satisfies ContextType} />
+      </>
+    );
+  }
+
+  return (
+    <section className="host-van">
+      <Link to="/host/vans" className="underline-link">
+        <HiOutlineArrowLongLeft />
+        Back to all vans
+      </Link>
+      <div className="host-van__tile">
+        <Suspense fallback={<h2>Loading your van...</h2>}>
+          <Await resolve={(van as { van: Van }).van}>{renderVan}</Await>
+        </Suspense>
       </div>
     </section>
   );

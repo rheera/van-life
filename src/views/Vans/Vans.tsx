@@ -1,4 +1,11 @@
-import { Link, useLoaderData, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLoaderData,
+  useSearchParams,
+  defer,
+  Await,
+} from "react-router-dom";
+import { Suspense } from "react";
 import { Van } from "../../types/interfaces";
 import { VanTypes } from "../../types/enums";
 import { vanTypeButtonColor } from "../../utils/functions";
@@ -14,10 +21,10 @@ export const loader = async () => {
   //   status: 500,
   // };
   // throw new Response("Not Found", { status: 411 });
-  return getVans();
+  return defer({ vans: getVans() });
 };
 const Vans = () => {
-  const vanData = useLoaderData() as Van[];
+  const vanDataPromise = useLoaderData();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filterType = searchParams.get("type");
@@ -32,10 +39,6 @@ const Vans = () => {
       return prevParams;
     });
   };
-
-  const filteredVans = filterType
-    ? vanData.filter(({ type }) => type === filterType)
-    : vanData;
 
   // Map through the enums with each type of Van, add types there when new types of vans added
   const displayVanFilters = Object.keys(VanTypes).map((type) => {
@@ -52,34 +55,40 @@ const Vans = () => {
     );
   });
 
-  const displayVanData = filteredVans.map((van) => (
-    <div key={van.id} className="vans__all-vans__van">
-      <Link
-        to={`${van.id}`}
-        state={{ search: "?" + searchParams.toString(), filterType }}
-      >
-        <div className="zoom-img">
-          <img src={van.imageUrl} alt={`${van.name} Van Image`} />
-        </div>
-      </Link>
-      <Link to={`${van.id}`}>
-        <div className="vans__all-vans__van__text">
-          <h3>{van.name}</h3>
-          <div className="vans__all-vans__van__text__price van-name-price">
-            <p>${van.price}</p>
-            <span>/day</span>
+  const renderLoadedVans = (vanData: Van[]) => {
+    const filteredVans = filterType
+      ? vanData.filter(({ type }) => type === filterType)
+      : vanData;
+
+    return filteredVans.map((van) => (
+      <div key={van.id} className="vans__all-vans__van">
+        <Link
+          to={`${van.id}`}
+          state={{ search: "?" + searchParams.toString(), filterType }}
+        >
+          <div className="zoom-img">
+            <img src={van.imageUrl} alt={`${van.name} Van Image`} />
           </div>
-        </div>
-      </Link>
-      <Button
-        onClick={() => handleQueryChange("type", van.type)}
-        variant={vanTypeButtonColor(van.type)}
-        className="van-type-badge"
-      >
-        {van.type}
-      </Button>
-    </div>
-  ));
+        </Link>
+        <Link to={`${van.id}`}>
+          <div className="vans__all-vans__van__text">
+            <h3>{van.name}</h3>
+            <div className="vans__all-vans__van__text__price van-name-price">
+              <p>${van.price}</p>
+              <span>/day</span>
+            </div>
+          </div>
+        </Link>
+        <Button
+          onClick={() => handleQueryChange("type", van.type)}
+          variant={vanTypeButtonColor(van.type)}
+          className="van-type-badge"
+        >
+          {van.type}
+        </Button>
+      </div>
+    ));
+  };
 
   return (
     <section className="vans main-content">
@@ -96,7 +105,13 @@ const Vans = () => {
             </button>
           )}
         </div>
-        <div className="vans__all-vans">{displayVanData}</div>
+        <div className="vans__all-vans">
+          <Suspense fallback={<h2>Loading Vans...</h2>}>
+            <Await resolve={(vanDataPromise as { vans: Van[] }).vans}>
+              {renderLoadedVans}
+            </Await>
+          </Suspense>
+        </div>
       </Container>
     </section>
   );
