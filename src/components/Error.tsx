@@ -12,10 +12,12 @@ const Error = () => {
       <Container className="site-page max-700-wide">
         <h2>Sorry, something went wrong</h2>
         <h3>{(error as CustomError)?.message}</h3>
-        <pre>
-          Error {(error as CustomError)?.status}:{" "}
-          {(error as CustomError)?.statusText}
-        </pre>
+        {(error as CustomError)?.statusText && (
+          <pre>
+            Error {(error as CustomError)?.status}:{" "}
+            {(error as CustomError)?.statusText}
+          </pre>
+        )}
         <Link to="/">
           <Button className="big-button" variant="dark">
             Return home

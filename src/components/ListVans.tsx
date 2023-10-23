@@ -6,7 +6,9 @@ const ListVans = ({ amtOfVansToShow = 10 }: { amtOfVansToShow: number }) => {
   const vans = useAsyncValue() as Van[];
 
   const [zoomVan, setZoomVan] = useState<string | number | null>(null);
-
+  if (vans.length < 1) {
+    return <h4>You don't have any vans listed yet</h4>;
+  }
   const displayVanData = vans.slice(0, amtOfVansToShow).map((van) => {
     return (
       <Link
