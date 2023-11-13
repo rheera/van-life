@@ -21,5 +21,15 @@
         text-decoration: none;
       }
     }
+    .demo-text {
+      margin: 0;
+      text-align: left;
+      color: #4d4d4d;
+      font-size: 0.9rem;
+      span {
+        color: #ff8c38;
+        cursor: pointer;
+      }
+    }
   }
 }

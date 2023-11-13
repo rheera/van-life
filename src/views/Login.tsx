@@ -64,6 +64,10 @@ const Login = () => {
   const navigation = useNavigation();
   const isLoggingIn = navigation.state;
 
+  function fillFields(inputBox: string, value: string) {
+    (document.getElementById(inputBox) as HTMLInputElement).value = value;
+  }
+
   return (
     <section className="login main-content">
       <Container className="site-page">
@@ -74,17 +78,19 @@ const Login = () => {
         )}
         <RouterForm replace method="post">
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Email address"
-              className="mb-3"
-            >
+            <FloatingLabel controlId="floatingEmail" label="Email address">
               <Form.Control
                 type="email"
                 placeholder="Enter email"
                 name="email"
               />
             </FloatingLabel>
+            <p className="demo-text">
+              Demo email:{" "}
+              <span onClick={() => fillFields("floatingEmail", "b@b.com")}>
+                b@b.com
+              </span>
+            </p>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -95,6 +101,12 @@ const Login = () => {
                 name="password"
               />
             </FloatingLabel>
+            <p className="demo-text">
+              Demo password:{" "}
+              <span onClick={() => fillFields("floatingPassword", "p123")}>
+                p123
+              </span>
+            </p>
           </Form.Group>
 
           <Button
